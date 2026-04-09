@@ -1,0 +1,77 @@
+@import "../styles/globals.css";
+
+@layer base {
+  :root {
+    --app-gradient-start: oklch(0.984 0.018 89.2);
+    --app-gradient-end: oklch(0.925 0.047 53.7);
+  }
+
+  body {
+    @apply m-0 min-h-screen min-w-[320px] bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 15% 20%, color-mix(in oklch, var(--app-gradient-end) 35%, transparent), transparent 45%),
+      linear-gradient(165deg, var(--app-gradient-start), var(--app-gradient-end));
+  }
+}
+
+#root {
+  @apply min-h-dvh;
+}
+
+@layer components {
+  .dictation-invite {
+    animation: dictation-glow 2.4s ease-in-out infinite;
+    will-change: box-shadow, border-color, transform;
+  }
+
+  .dictation-invite:hover {
+    animation-play-state: paused;
+  }
+
+  .dictation-recording {
+    animation: dictation-recording 1.2s ease-in-out infinite;
+    will-change: box-shadow, transform;
+  }
+}
+
+@keyframes dictation-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px oklch(0.78 0.14 82 / 0.5),
+      0 0 0 0 oklch(0.8 0.16 82 / 0.18),
+      0 0 0 0 oklch(0.82 0.15 82 / 0.12),
+      0 0 10px 1px oklch(0.84 0.15 82 / 0.1);
+    border-color: oklch(0.78 0.14 82 / 0.6);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 1px oklch(0.78 0.14 82 / 0.78),
+      0 0 0 6px oklch(0.81 0.16 82 / 0.2),
+      0 0 0 12px oklch(0.83 0.15 82 / 0.1),
+      0 0 20px 4px oklch(0.84 0.15 82 / 0.22);
+    border-color: oklch(0.8 0.15 82 / 0.85);
+    transform: scale(1.025);
+  }
+}
+
+@keyframes dictation-recording {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px oklch(0.68 0.21 24 / 0.55),
+      0 0 0 0 oklch(0.68 0.21 24 / 0.18),
+      0 0 14px 2px oklch(0.68 0.21 24 / 0.18);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 1px oklch(0.68 0.21 24 / 0.75),
+      0 0 0 5px oklch(0.68 0.21 24 / 0.2),
+      0 0 22px 4px oklch(0.68 0.21 24 / 0.24);
+    transform: scale(1.04);
+  }
+}
