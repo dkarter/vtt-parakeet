@@ -1,39 +1,25 @@
-# bun-react-tailwind-shadcn-template
+# VTT Parakeet
 
-To install dependencies:
+Realtime Voice To Text using Parakeet on device
+
+![](https://private-user-images.githubusercontent.com/551858/575692350-d8903a74-d362-4024-bc2d-97bfe126eff7.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU3MDU3MDIsIm5iZiI6MTc3NTcwNTQwMiwicGF0aCI6Ii81NTE4NTgvNTc1NjkyMzUwLWQ4OTAzYTc0LWQzNjItNDAyNC1iYzJkLTk3YmZlMTI2ZWZmNy5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYwNDA5JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MDQwOVQwMzMwMDJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kZmMwY2I4Mzg2ZjRkZWMzYmY4YjAxNDlkNThhNDVlYTBiZTMyNjhkNzg2NDNmM2QzNWJiMjhiMjA3NTZhOWUyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.EcDeDKWcMZZBZEYaxcNnQ-VMAkA0IcVk-NlPGODXxFk)
+
+## Features
+
+- Live transcription with backtracking for correction
+- Runs entirely on device (tested on macOS with Apple Silicon)
+- Post processing using local LLM (requires Ollama)
+
+# Setup and Run
+
+Install deps:
 
 ```bash
 bun install
 ```
 
-To start a development server:
+Start dev server
 
 ```bash
 bun dev
 ```
-
-To run for production:
-
-```bash
-bun start
-```
-
-This project was created using `bun init` in bun v1.3.11. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
-
-## Local transcript cleanup
-
-The live STT pipeline can optionally post-process transcripts on the server through a local Ollama-compatible model. Raw transcription stays interactive while you speak, and cleanup runs only after a longer pause or when dictation stops. This is used to:
-
-- remove filler words like `um`, `uh`, and `ah`
-- fix common technical term recognition issues like `type script` -> `TypeScript`
-- wrap known technical terms like `Google Chrome`, `Firefox`, `React`, and `shadcn/ui` in backticks
-
-By default the server will try `http://127.0.0.1:11434` with model `qwen3:8b`, then fall back to heuristic cleanup if the model is unavailable.
-
-Environment variables:
-
-- `TRANSCRIPT_CLEANUP_ENABLED=false` disables model-based cleanup
-- `TRANSCRIPT_CLEANUP_MODEL=qwen3:8b`
-- `TRANSCRIPT_CLEANUP_BASE_URL=http://127.0.0.1:11434`
-- `TRANSCRIPT_CLEANUP_TIMEOUT_MS=6000`
-- `TRANSCRIPT_CLEANUP_PAUSE_MS=1800`
